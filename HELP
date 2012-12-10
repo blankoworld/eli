@@ -3,6 +3,6 @@ AJAX RSS Reader: http://ajax.phpmagazine.net/2005/11/ajax_rss_reader_step_by_ste
 Nanoblogger identica plugin: http://nanoblogger.vampiris.me/plugins/identica/
 IdenticaWidget: https://bitbucket.org/derschreckliche/identicawidget
 
-Begin from: http://identi.ca/api/users/show/bl4n.xml
+Begin from: http://identi.ca/api/users/show/bl4n.xml or http://identi.ca/api/statusnet/groups/show/bbox.xml
 Fetch ID, then do: http://identi.ca/api/statuses/user_timeline/63863.xml (ID.xml)
 Then fetch all status/statusnet:html elements
