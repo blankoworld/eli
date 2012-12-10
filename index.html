@@ -48,7 +48,7 @@ function ReqChange() {
 			var items = channel.getElementsByTagName('item');
 			for (var n=0; n < items.length; n++)
 			{
-				var itemTitle = items[n].getElementsByTagName('title').item(0).firstChild.data;
+				var itemDesc = items[n].getElementsByTagName('description').item(0).firstChild.data;
 				var itemLink = items[n].getElementsByTagName('link').item(0).firstChild.data;
 				try 
 				{ 
@@ -60,7 +60,7 @@ function ReqChange() {
 				}
 				
 			
-        content += '<li>'+itemPubDate+'</font><a href="'+itemLink+'">'+itemTitle+'</a></li>';
+        content += '<li>'+itemPubDate+'</font><a href="'+itemLink+'">'+itemDesc+'</a></li>';
         if (n == nbmax)
         {
           n = items.length;
