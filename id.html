@@ -9,13 +9,18 @@
 
 var api = 'http://identi.ca/api/';
 var user_api = 'users/show/';
-var type = 'user';
+var user_rss = 'statuses/user_timeline/';
+var group_api = 'statusnet/groups/show/';
+var group_rss = 'statusnet/groups/timeline/';
+var type = 'user'; // could be 'group' to follow a group
 var user = 'bl4n';
-
-var url = api+user_api+user+'.xml'
-
-// http://identi.ca/api/statuses/user_timeline/63863.rss
-
+var api_url = api+user_api;
+var api_rss_url = api+user_rss;
+if (type=='group') {
+  api_url = api+group_api
+  api_rss_url = api+group_rss;
+}
+url = api_url+user+'.xml';
 function displayResult()
 {
   if (window.XMLHttpRequest)
@@ -39,6 +44,11 @@ function displayResult()
     id = e;
   }
   document.getElementById("content").innerHTML = id;
+  rss_url = api_rss_url+id+'.xml';
+  xmlhttp.open("GET",rss_url,false);
+  xmlhttp.send();
+  rssDoc=xmlhttp.responseXML;
+  document.getElementById("content").innerHTML = rssDoc.getElementsByTagName("statuses")[0].getElementsByTagName("status")[0].getElementsByTagName("statusnet:html").item(0).firstChild.data;
 }
 
 </script>
