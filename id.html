@@ -12,8 +12,8 @@ var user_api = 'users/show/';
 var user_rss = 'statuses/user_timeline/';
 var group_api = 'statusnet/groups/show/';
 var group_rss = 'statusnet/groups/timeline/';
-var type = 'user'; // could be 'group' to follow a group
-var user = 'bl4n';
+var type = 'group'; // could be 'group' to follow a group
+var user = 'bbox';
 var api_url = api+user_api;
 var api_rss_url = api+user_rss;
 if (type=='group') {
@@ -34,8 +34,8 @@ function displayResult()
   xmlhttp.open("GET",url,false);
   xmlhttp.send();
   xmlDoc=xmlhttp.responseXML;
-
-  user=xmlDoc.getElementsByTagName("user");
+  
+  user=xmlDoc.getElementsByTagName(type);
   try {
     id = user[0].getElementsByTagName("id")[0].childNodes[0].nodeValue;
   }
