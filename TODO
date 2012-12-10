@@ -1,0 +1,7 @@
+TODO
+----
+
+- Permit to fetch from user or group (a given RSS 2.0 feed)
+- Permit to fetch from a given user or group (and so fetch ID from this user/group and then the RSS)
+- Fetch directly all necessary element from STATUSNET API
+
