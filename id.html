@@ -14,6 +14,7 @@ var group_api = 'statusnet/groups/show/';
 var group_rss = 'statusnet/groups/timeline/';
 var type = 'user'; // could be 'group' to follow a group
 var user = 'bl4n';
+var max = 5;
 var api_url = api+user_api;
 var api_rss_url = api+user_rss;
 if (type=='group') {
@@ -43,12 +44,29 @@ function displayResult()
   {
     id = e;
   }
-  document.getElementById("content").innerHTML = id;
   rss_url = api_rss_url+id+'.xml';
   xmlhttp.open("GET",rss_url,false);
   xmlhttp.send();
   rssDoc=xmlhttp.responseXML;
-  document.getElementById("content").innerHTML = rssDoc.getElementsByTagName("statuses")[0].getElementsByTagName("status")[0].getElementsByTagName("statusnet:html").item(0).firstChild.data;
+  content = '<ul>';
+  var items = rssDoc.getElementsByTagName('statuses').item(0).getElementsByTagName('status');
+  var max_item = max - 1
+  for (var n=0; n < items.length; n++) {
+    try {
+      var item_content = items[n].getElementsByTagName('statusnet:html').item(0).firstChild.data;
+    }
+    catch (e) {
+      var item_content = ''
+    }
+    content += '<li>'+item_content+'</li>';
+    if ((max_item < items.length) && (n==max_item))
+    {
+      n = items.length;
+    }
+  }
+
+  content += '</ul>';
+  document.getElementById("content").innerHTML = content;
 }
 
 </script>
