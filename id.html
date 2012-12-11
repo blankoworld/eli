@@ -35,7 +35,7 @@ function displayResult()
   xmlhttp.send();
   xmlDoc=xmlhttp.responseXML;
 
-  user=xmlDoc.getElementsByTagName("user");
+  user=xmlDoc.getElementsByTagName(type);
   try {
     id = user[0].getElementsByTagName("id")[0].childNodes[0].nodeValue;
   }
