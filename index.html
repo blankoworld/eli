@@ -4,15 +4,24 @@
   <title>ELI, Expression libre Identica</title>
   <link rel="stylesheet" href="style.css" type="text/css" />
   <script language="javascript"  type="text/javascript">
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://sam.zoy.org/wtfpl/COPYING for more details. */
 
+// Change variables here.
+var type = 'user'; // could be 'group' to follow a group
+var user = 'bl4n';
+var max = 5;
+var tag = 'content';
+
+// Other variables
 var api = 'http://identi.ca/api/';
 var user_api = 'users/show/';
 var user_rss = 'statuses/user_timeline/';
 var group_api = 'statusnet/groups/show/';
 var group_rss = 'statusnet/groups/timeline/';
-var type = 'user'; // could be 'group' to follow a group
-var user = 'bl4n';
-var max = 5;
 var api_url = api+user_api;
 var api_rss_url = api+user_rss;
 if (type=='group') {
@@ -20,6 +29,7 @@ if (type=='group') {
   api_rss_url = api+group_rss;
 }
 url = api_url+user+'.xml';
+
 function displayResult()
 {
   if (window.XMLHttpRequest)
@@ -64,7 +74,7 @@ function displayResult()
   }
 
   content += '</ul>';
-  document.getElementById("content").innerHTML = content;
+  document.getElementById(tag).innerHTML = content;
 }
 
   </script>
