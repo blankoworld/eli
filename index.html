@@ -1,136 +1,89 @@
+<!DOCTYPE html>
 <html>
-
 <head>
-<title>AJAX RSS Reader</title>
-<link rel="stylesheet" href="style.css" type="text/css" />
+  <title>ELI, Expression libre Identica</title>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+  <script language="javascript"  type="text/javascript">
+/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://sam.zoy.org/wtfpl/COPYING for more details. */
+
+// Change variables here.
+var type = 'user'; // could be 'group' to follow a group
+var user = 'bl4n';
+var max = 5;
+var tag = 'content';
+
+// Other variables
+var api = 'http://identi.ca/api/';
+var user_api = 'users/show/';
+var user_rss = 'statuses/user_timeline/';
+var group_api = 'statusnet/groups/show/';
+var group_rss = 'statusnet/groups/timeline/';
+var api_url = api+user_api;
+var api_rss_url = api+user_rss;
+if (type=='group') {
+  api_url = api+group_api
+  api_rss_url = api+group_rss;
+}
+url = api_url+user+'.xml';
+
+function displayResult()
+{
+  if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  }
+  else
+  {// code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.open("GET",url,false);
+  xmlhttp.send();
+  xmlDoc=xmlhttp.responseXML;
+
+  user=xmlDoc.getElementsByTagName(type);
+  try {
+    id = user[0].getElementsByTagName("id")[0].childNodes[0].nodeValue;
+  }
+  catch (e)
+  {
+    id = e;
+  }
+  rss_url = api_rss_url+id+'.xml';
+  xmlhttp.open("GET",rss_url,false);
+  xmlhttp.send();
+  rssDoc=xmlhttp.responseXML;
+  content = '<ul>';
+  var items = rssDoc.getElementsByTagName('statuses').item(0).getElementsByTagName('status');
+  var max_item = max - 1
+  for (var n=0; n < items.length; n++) {
+    try {
+      var item_content = items[n].getElementsByTagName('statusnet:html').item(0).firstChild.data;
+    }
+    catch (e) {
+      var item_content = ''
+    }
+    content += '<li>'+item_content+'</li>';
+    if ((max_item < items.length) && (n==max_item))
+    {
+      n = items.length;
+    }
+  }
+
+  content += '</ul>';
+  document.getElementById(tag).innerHTML = content;
+}
+
+  </script>
 </head>
+<body onload="displayResult()">
 
-<script language="javascript"  type="text/javascript">
-
-
-var max = 2; // Maximum of posts
-var nbmax = (max - 1); // Number max of posts for the "for loop"
-var RSSRequestObject = false; // XMLHttpRequest Object
-var Backend = 'http://identi.ca/api/statuses/user_timeline/63863.rss'; // Backend url
-window.setInterval("update_timer()", 1200000); // update the data every 20 mins
-
-
-if (window.XMLHttpRequest) // try to create XMLHttpRequest
-	RSSRequestObject = new XMLHttpRequest();
-
-if (window.ActiveXObject)	// if ActiveXObject use the Microsoft.XMLHTTP
-	RSSRequestObject = new ActiveXObject("Microsoft.XMLHTTP");
-
-
-/*
-* onreadystatechange function
-*/
-function ReqChange() {
-
-	// If data received correctly
-	if (RSSRequestObject.readyState==4) {
-	
-		// if data is valid
-		if (RSSRequestObject.responseText.indexOf('invalid') == -1) 
-		{ 	
-			// Parsing RSS
-			var node = RSSRequestObject.responseXML.documentElement; 
-			
-			
-			// Get Channel information
-			var channel = node.getElementsByTagName('channel').item(0);
-			var title = channel.getElementsByTagName('title').item(0).firstChild.data;
-			var link = channel.getElementsByTagName('link').item(0).firstChild.data;
-			
-			content = '<div class="channeltitle"><a href="'+link+'">'+title+'</a></div><ul>';
-		
-			// Browse items
-			var items = channel.getElementsByTagName('item');
-			for (var n=0; n < items.length; n++)
-			{
-				var itemDesc = items[n].getElementsByTagName('description').item(0).firstChild.data;
-				var itemLink = items[n].getElementsByTagName('link').item(0).firstChild.data;
-				try 
-				{ 
-					var itemPubDate = '<font color=gray>['+items[n].getElementsByTagName('pubDate').item(0).firstChild.data+'] ';
-				} 
-				catch (e) 
-				{ 
-					var itemPubDate = '';
-				}
-				
-			
-        content += '<li>'+itemPubDate+'</font><a href="'+itemLink+'">'+itemDesc+'</a></li>';
-        if (n == nbmax)
-        {
-          n = items.length;
-        }
-			}
-			
-			
-			content += '</ul>';
-			// Display the result
-			document.getElementById("ajaxreader").innerHTML = content;
-
-			// Tell the reader the everything is done
-			document.getElementById("status").innerHTML = "Done.";
-			
-		}
-		else {
-			// Tell the reader that there was error requesting data
-			document.getElementById("status").innerHTML = "<div class=error>Error requesting data.<div>";
-		}
-		
-		HideShow('status');
-	}
-	
-}
-
-/*
-* Main AJAX RSS reader request
-*/
-function RSSRequest() {
-
-	// change the status to requesting data
-	HideShow('status');
-	document.getElementById("status").innerHTML = "Lecture des donn&eacute;es RSS ...";
-	
-	// Prepare the request
-	RSSRequestObject.open("GET", Backend , true);
-	// Set the onreadystatechange function
-	RSSRequestObject.onreadystatechange = ReqChange;
-	// Send
-	RSSRequestObject.send(null); 
-}
-
-/*
-* Timer
-*/
-function update_timer() {
-	RSSRequest();
-}
-
-
-function HideShow(id){
-	var el = GetObject(id);
-	if(el.style.display=="none")
-	el.style.display='';
-	else
-	el.style.display='none';
-}
-
-function GetObject(id){
-	var el = document.getElementById(id);
-	return(el);
-}
-
-</script>
-
-<body onload="RSSRequest();">
-
-<h2>AJAX RSS Reader</h2>
-<div id="status" style="display:none"></div>
-<div id="ajaxreader"></div>
+<h1>ELI, Expression Libre Identica</h1>
+<div id="content">
+  <p>Flux d'activit&eacute;...</p>
+</div>
 </body>
-
 </html>
