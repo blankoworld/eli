@@ -1,23 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8" />
   <title>ELI, Expression libre Identica</title>
   <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body onload="displayResult()">
 
 <h1>ELI, Expression Libre Identica</h1>
-<form id="loadForm" action="">
-  <p><label for="profile_api">API</label> <input type="text" id="profile_api" value="http://identi.ca/api/"></p>
-  <p><label for="profile_name">Name</label> <input type="text" id="profile_name" value="bl4n"></p>
-  <p><input type="submit" value="charger"></p>
+<form id="loadForm">
+  <p>
+    <label for="profile_api">API : </label> <input type="text" id="profile_api" value="http://identi.ca/api/">
+  </p>
+  <p>
+    <label for="profile_type">Type : </label>
+    <select name="profile_type" form="loadForm" id="profile_type">
+      <option value="user">User</option>
+      <option value="group">Group</option>
+    </select>
+  </p>
+  <p>
+    <label for="profile_name">Name : </label> <input type="text" id="profile_name" value="bl4n">
+  </p>
+  <p>
+    <input type="submit" value="(re)Load">
+  </p>
 </form>
 
 <div id="content">
   <p>Flux d'activit&eacute;...</p>
 </div>
 
-  <script language="javascript"  type="text/javascript">
+  <script type="text/javascript">
+  <!--
+
 /* This program is free software. It comes without any warranty, to
  * the extent permitted by applicable law. You can redistribute it
  * and/or modify it under the terms of the Do What The Fuck You Want
@@ -54,6 +70,8 @@ function loadConfig()
 {
     api = document.getElementById('profile_api').value;
     user = document.getElementById('profile_name').value;
+    profile_type = document.getElementById('profile_type');
+    type = profile_type.options[profile_type.selectedIndex].value;
     api_url = api+user_api;
     api_rss_url = api+user_rss;
     if (type=='group') {
@@ -111,8 +129,8 @@ function displayResult()
   content += '</ul>';
   document.getElementById(tag).innerHTML = content;
 }
-
-</script>
+  -->
+  </script>
 
 
 </body>
