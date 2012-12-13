@@ -1,0 +1,43 @@
+body, html {
+background-color: #999999;
+color: #ffffff;
+}
+
+html {
+margin: 0em;
+padding: 1em 3%;
+background-color: #999999;
+color: #ffffff;
+}
+
+body {
+padding: 1em;
+color: #112233;
+background-color: #ffffff;
+font-family: Georgia, Palatina, serif;
+box-shadow: 1px 1px 12px #000000;
+}
+
+h1 {
+text-align: center;
+}
+
+#content {
+width: 250px;
+margin: 0;
+padding: 0;
+border: thin solid #eee;
+border-radius: 12px;
+box-shadow: 2px 1px 5px #000;
+}
+
+#content ul {
+margin: 5px 5px 5px -35px;
+list-style-type: none;
+}
+
+#content ul li {
+display: block;
+margin-bottom: 5px;
+padding: 5px;
+}

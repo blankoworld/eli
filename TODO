@@ -1,8 +1,10 @@
 TODO
 ----
 
-- Create a README in english
 - Idem in french
+- Create a default CSS for the identica's widget
+- Add more information about status?
+- Fetch an image from user?
 
 DONE
 ----
@@ -10,3 +12,4 @@ DONE
 - Permit to fetch from user or group (a given RSS 2.0 feed)
 - Permit to fetch from a given user or group (and so fetch ID from this user/group and then the RSS)
 - Fetch directly all necessary element from STATUSNET API
+- Create a README in english
