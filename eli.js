@@ -24,9 +24,11 @@ var group_api = 'statusnet/groups/show/';
 var group_rss = 'statusnet/groups/timeline/';
 var api_url = api+user_api;
 var api_rss_url = api+user_rss;
+var img_name = 'profile_image_url';
 if (type=='group') {
   api_url = api+group_api
   api_rss_url = api+group_rss;
+  img_name = 'stream_logo';
 }
 url = api_url+user+'.xml';
 
@@ -38,9 +40,11 @@ function loadConfig()
     type = profile_type.options[profile_type.selectedIndex].value;
     api_url = api+user_api;
     api_rss_url = api+user_rss;
+    img_name = 'profile_image_url';
     if (type=='group') {
         api_url = api+group_api
         api_rss_url = api+group_rss;
+        img_name = 'stream_logo';
     }
     url = api_url+user+'.xml';
 
@@ -61,20 +65,31 @@ function displayResult()
   xmlhttp.send();
   xmlDoc=xmlhttp.responseXML;
 
-  user=xmlDoc.getElementsByTagName(type);
+  userinfo=xmlDoc.getElementsByTagName(type);
   try {
-    id = user[0].getElementsByTagName("id")[0].childNodes[0].nodeValue;
+    id = userinfo[0].getElementsByTagName("id")[0].childNodes[0].nodeValue;
   }
   catch (e)
   {
     id = e;
   }
+  // fetch image
+  try {
+    img = userinfo[0].getElementsByTagName(img_name)[0].childNodes[0].nodeValue;
+  }
+  catch (e) {
+    img = '';
+  }
   rss_url = api_rss_url+id+'.xml';
   xmlhttp.open("GET",rss_url,false);
   xmlhttp.send();
-  rssDoc=xmlhttp.responseXML;
-  content = '<ul>';
-  var items = rssDoc.getElementsByTagName('statuses').item(0).getElementsByTagName('status');
+  xmlDoc=xmlhttp.responseXML;
+  content = '<div id="eli_widget"><header>';
+  if (img != '') {
+    content += '<img src="'+img+'" alt="'+user+'" title="Avatar"/>';
+  }
+  content += ' <p>'+user+'</p></header>';
+  var items = xmlDoc.getElementsByTagName('statuses').item(0).getElementsByTagName('status');
   var max_item = max - 1
   for (var n=0; n < items.length; n++) {
     try {
@@ -83,14 +98,14 @@ function displayResult()
     catch (e) {
       var item_content = ''
     }
-    content += '<li>'+item_content+'</li>';
+    content += '<article>'+item_content+'</article>';
     if ((max_item < items.length) && (n==max_item))
     {
       n = items.length;
     }
   }
 
-  content += '</ul>';
+  content += '<footer></footer></div>';
   document.getElementById(tag).innerHTML = content;
 }
 
