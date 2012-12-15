@@ -26,7 +26,7 @@ Just:
       var tag = 'content';
     </script>
 
-An example is available on **index.html** page.
+An example is available on **minimal.html** page. You can also see a more complete version on **index.html** page.
 
 ## Configuration
 
@@ -36,6 +36,10 @@ You probably want to change these variables:
   * user: Add here the name of the user (or the group) you want to follow
   * max: Add here the number of statuses you want to display. By default identica seems to only give 20 statuses.
   * tag: The name of the tag we should change to display all statuses. In the previous example, the div with ID equal to *content* would be changed. But you can add another ID.
+
+## Read code
+
+**eli.js** is a minimal version of ELI. To have a more readable version, with more options, you can open **eli.max.js** file.
 
 ## Contact
 
