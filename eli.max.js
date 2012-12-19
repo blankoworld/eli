@@ -14,7 +14,7 @@ loadForm.addEventListener('submit', function(e) {
 var type = 'user'; // could be 'group' to follow a group
 var user = 'bl4n';
 var max = 5;
-var tag = 'content';
+var tag = 'elitimeline';
 
 // Other variables
 var api = 'http://identi.ca/api/';
@@ -109,3 +109,4 @@ function displayResult()
   document.getElementById(tag).innerHTML = content;
 }
 
+window.onload = displayResult;
