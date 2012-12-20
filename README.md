@@ -13,7 +13,7 @@ This program is under the [WTF Public License](http://sam.zoy.org/wtfpl/COPYING 
 Just:
 
   * copy the eli.js in your website directory
-  * add this code **at the end of your page before the </body> tag**:
+  * add this code **at the end of your page before the `</body>` tag**:
 
     <div id="elitimeline">
       <p>Timeline activity...</p>
