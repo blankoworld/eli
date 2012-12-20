@@ -15,18 +15,18 @@ Just:
   * copy the eli.js in your website directory
   * add this code **at the end of your page before the `</body>` tag**:
 
-    <pre><code>
-      <div id="elitimeline">
-        <p>Timeline activity...</p>
-      </div>`
+    ```html
+    <div id="elitimeline">
+      <p>Timeline activity...</p>
+    </div>
 
-      <script type="text/javascript" src="./eli.js">
-        var type = 'user'; // could be 'group' to follow a group
-        var user = 'bl4n';
-        var max = 5;
-        var tag = 'elitimeline';
-      </script>
-    </code></pre>
+    <script type="text/javascript" src="./eli.js">
+      var type = 'user'; // could be 'group' to follow a group
+      var user = 'bl4n';
+      var max = 5;
+      var tag = 'elitimeline';
+    </script>
+    ```
 
 An example is available on **minimal.html** page. You can also see a more complete version on **index.html** page.
 
