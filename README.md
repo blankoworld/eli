@@ -13,19 +13,61 @@ This program is under the [WTF Public License](http://sam.zoy.org/wtfpl/COPYING 
 Just:
 
   * copy the eli.js in your website directory
-  * add this code **at the end of your page before the `</body>` tag**:
+  * add this code in your page:
 
     ```html
     <div id="elitimeline">
       <p>Timeline activity...</p>
-    </div>
+    </div>```
 
-    <script type="text/javascript" src="./eli.js">
+  * add this code **at the end of your page before the `</body>` tag**:
+
+    ```<script type="text/javascript" src="./eli.js">
       var type = 'user'; // could be 'group' to follow a group
       var user = 'bl4n';
       var max = 5;
       var tag = 'elitimeline';
     </script>
+    ```
+
+In order ELI widget to be more beautiful, add this in your CSS file or in **<style> tag**:
+
+    ```#eli_widget {
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    border: thin solid #eee;
+    border-radius: 12px;
+    box-shadow: 2px 1px 5px #000;
+    }
+
+    #eli_widget header {
+    text-align: left;
+    border-bottom: 5px solid #fb6104;
+    background-color: #43568e;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    color: #ffffff;
+    }
+
+    #eli_widget header img {
+    margin: 5px;
+    background-color: #ffffff;
+    border-top-left-radius: 12px;
+    float: left;
+    }
+
+    #eli_widget header p {
+    margin: 0;
+    line-height: 60px;
+    }
+
+    #eli_widget article {
+    display: block;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-bottom: thin solid #eeeeee;
+    }
     ```
 
 An example is available on **minimal.html** page. You can also see a more complete version on **index.html** page.
