@@ -12,12 +12,12 @@ loadForm.addEventListener('submit', function(e) {
 
 // Change variables here.
 var type = 'user'; // could be 'group' to follow a group
-var user = 'bl4n';
+var user = 'debian';
 var max = 5;
 var tag = 'elitimeline';
 
 // Other variables
-var api = 'https://status.vinilox.eu/api/';
+var api = 'https://quitter.se/api/';
 var user_api = 'users/show/';
 var user_rss = 'statuses/user_timeline/';
 var group_api = 'statusnet/groups/show/';
