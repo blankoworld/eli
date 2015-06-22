@@ -24,6 +24,9 @@ text-align: center;
 
 #eli_widget {
 width: 250px;
+height: 150px;
+overflow-x: visible;
+overflow-y: auto;
 margin: 0;
 padding: 0;
 border: thin solid #eee;
