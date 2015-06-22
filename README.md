@@ -15,24 +15,26 @@ Just:
   * copy the eli.js in your website directory
   * add this code in your page:
 
-    ```html
+```html
     <div id="elitimeline">
       <p>Timeline activity...</p>
-    </div>```
+    </div>
+```
 
 Then add this code **at the end of your page before the `</body>` tag**:
 
-    ```html
+```html
     <script type="text/javascript" src="./eli.js">
       var type = 'user'; // could be 'group' to follow a group
       var user = 'bl4n';
       var max = 5;
       var tag = 'elitimeline';
-    </script>```
+    </script>
+```
 
 In order ELI widget to be more beautiful, add this in your CSS file or in **`</style>` tag**:
 
-    ```css
+```css
     #eli_widget {
     width: 250px;
     margin: 0;
@@ -68,7 +70,8 @@ In order ELI widget to be more beautiful, add this in your CSS file or in **`</s
     margin-bottom: 5px;
     padding: 5px;
     border-bottom: thin solid #eeeeee;
-    }```
+    }
+```
 
 An example is available on **minimal.html** page. You can also see a more complete version on **index.html** page.
 
