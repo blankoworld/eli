@@ -24,6 +24,7 @@ text-align: center;
 
 #eli_widget {
 width: 250px;
+height: auto;
 margin: 0;
 padding: 0;
 border: thin solid #eee;
@@ -57,4 +58,8 @@ display: block;
 margin-bottom: 5px;
 padding: 5px;
 border-bottom: thin solid #eeeeee;
+}
+
+#eli_widget article img {
+max-width: 240px;
 }

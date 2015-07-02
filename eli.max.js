@@ -15,35 +15,36 @@ var type = 'user'; // could be 'group' to follow a group
 var user = 'debian';
 var max = 5;
 var tag = 'elitimeline';
+var domain = 'https://quitter.se'
 
 // Other variables
-var api = 'https://quitter.se/api/';
+var api = '/api/';
 var user_api = 'users/show/';
 var user_rss = 'statuses/user_timeline/';
 var group_api = 'statusnet/groups/show/';
 var group_rss = 'statusnet/groups/timeline/';
-var api_url = api+user_api;
-var api_rss_url = api+user_rss;
+var api_url = domain+api+user_api;
+var api_rss_url = domain+api+user_rss;
 var img_name = 'profile_image_url';
 if (type=='group') {
-  api_url = api+group_api
-  api_rss_url = api+group_rss;
+  api_url = domain+api+group_api
+  api_rss_url = domain+api+group_rss;
   img_name = 'stream_logo';
 }
 url = api_url+user+'.xml';
 
 function loadConfig()
 {
-    api = document.getElementById('profile_api').value;
+    domain = document.getElementById('profile_domain').value;
     user = document.getElementById('profile_name').value;
     profile_type = document.getElementById('profile_type');
     type = profile_type.options[profile_type.selectedIndex].value;
-    api_url = api+user_api;
-    api_rss_url = api+user_rss;
+    api_url = domain+api+user_api;
+    api_rss_url = domain+api+user_rss;
     img_name = 'profile_image_url';
     if (type=='group') {
-        api_url = api+group_api
-        api_rss_url = api+group_rss;
+        api_url = domain+api+group_api
+        api_rss_url = domain+api+group_rss;
         img_name = 'stream_logo';
     }
     url = api_url+user+'.xml';
@@ -96,9 +97,20 @@ function displayResult()
       var item_content = items[n].getElementsByTagName('statusnet:html').item(0).firstChild.data;
     }
     catch (e) {
-      var item_content = ''
+      var item_content = '';
     }
-    content += '<article>'+item_content+'</article>';
+    try {
+      var image_url,image_link="";
+      if (['image/jpeg','image/gif','image/png','image/svg'].indexOf(items[n].getElementsByTagName('attachments').item(0).getElementsByTagName('enclosure').item(0).getAttribute("mimetype"))>=0) {
+        var image_url=items[n].getElementsByTagName('attachments').item(0).getElementsByTagName('enclosure').item(0).getAttribute("url");
+        var image_link="<a target= \"_blank\" href=\""+image_url+"\"><img alt=\"Attachment\" width=\"200\" src=" + image_url + " /></a>"
+      }
+    }
+    catch(e) {
+      var image_url,image_link="";
+    }
+        
+    content += '<article>'+item_content+image_link+'</article>';
     if ((max_item < items.length) && (n==max_item))
     {
       n = items.length;
