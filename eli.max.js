@@ -35,16 +35,16 @@ url = api_url+user+'.xml';
 
 function loadConfig()
 {
-    api = document.getElementById('profile_api').value;
+    domain = document.getElementById('profile_domain').value;
     user = document.getElementById('profile_name').value;
     profile_type = document.getElementById('profile_type');
     type = profile_type.options[profile_type.selectedIndex].value;
-    api_url = api+user_api;
-    api_rss_url = api+user_rss;
+    api_url = domain+api+user_api;
+    api_rss_url = domain+api+user_rss;
     img_name = 'profile_image_url';
     if (type=='group') {
-        api_url = api+group_api
-        api_rss_url = api+group_rss;
+        api_url = domain+api+group_api
+        api_rss_url = domain+api+group_rss;
         img_name = 'stream_logo';
     }
     url = api_url+user+'.xml';
@@ -97,18 +97,17 @@ function displayResult()
       var item_content = items[n].getElementsByTagName('statusnet:html').item(0).firstChild.data;
     }
     catch (e) {
-      var item_content = ''
+      var item_content = '';
     }
     try {
-        if (['image/jpeg','image/gif','image/png','image/svg'].indexOf(items[n].getElementsByTagName('attachments').item(0).getElementsByTagName('enclosure').item(0).getAttribute("mimetype"))>=0)
-            {
-                image_url=items[n].getElementsByTagName('attachments').item(0).getElementsByTagName('enclosure').item(0).getAttribute("url");image_link="<a target= \"_blank\" href=\""+image_url+"\"><img alt=\"Attachment\" width=\"200\" src=" + image_url + " /></a>"
-            }
-        
-        }
+      var image_url,image_link="";
+      if (['image/jpeg','image/gif','image/png','image/svg'].indexOf(items[n].getElementsByTagName('attachments').item(0).getElementsByTagName('enclosure').item(0).getAttribute("mimetype"))>=0) {
+        var image_url=items[n].getElementsByTagName('attachments').item(0).getElementsByTagName('enclosure').item(0).getAttribute("url");
+        var image_link="<a target= \"_blank\" href=\""+image_url+"\"><img alt=\"Attachment\" width=\"200\" src=" + image_url + " /></a>"
+      }
+    }
     catch(e) {
-        image_url,image_link=""
-        
+      var image_url,image_link="";
     }
         
     content += '<article>'+item_content+image_link+'</article>';

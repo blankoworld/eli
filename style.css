@@ -59,3 +59,7 @@ margin-bottom: 5px;
 padding: 5px;
 border-bottom: thin solid #eeeeee;
 }
+
+#eli_widget article img {
+max-width: 240px;
+}
