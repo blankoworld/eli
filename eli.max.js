@@ -95,6 +95,7 @@ function displayResult()
   for (var n=0; n < items.length; n++) {
     try {
       var item_content = items[n].getElementsByTagName('statusnet:html').item(0).firstChild.data;
+      item_content = item_content.replace(item_content.slice(item_content.indexOf('<div'),item_content.indexOf('div>')+4),'') 
     }
     catch (e) {
       var item_content = '';
