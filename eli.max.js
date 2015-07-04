@@ -87,13 +87,25 @@ function displayResult()
   xmlDoc=xmlhttp.responseXML;
   content = '<div id="eli_widget"><header>';
   if (img != '') {
-    content += '<img src="'+img+'" alt="'+user+'" title="Avatar"/>';
+    content += '<a target= "_blank" href="'+domain+"/" + user + '"><img src="'+img+'" alt="'+user+'" title="Avatar"/></a>';
   }
   content += ' <p>'+user+'</p></header>';
   var items = xmlDoc.getElementsByTagName('statuses').item(0).getElementsByTagName('status');
   var max_item = max - 1
   for (var n=0; n < items.length; n++) {
-    try {
+      try {
+          var item_groupmember="",item_groupmember_name="",item_groupmember_image="",item_groupmember_link="";
+          if (type=='group'){
+             var item_groupmember_name = "@" + items[n].getElementsByTagName('screen_name').item(0).firstChild.data;
+             var item_groupmember_image = items[n].getElementsByTagName('profile_image_url_https').item(0).firstChild.data;
+             var item_groupmember_link = items[n].getElementsByTagName('statusnet:profile_url').item(0).firstChild.data; 
+             var item_groupmember = '<span class=\"groupmember\"><a target= \"_blank\" href=\"' + item_groupmember_link + '\"><img alt=\"Profile\" align=\"left\" src="' + item_groupmember_image + '\" />' + item_groupmember_name + '</a>: </span>';}
+      }
+      catch (e) {
+        var item_groupmember="",item_groupmember_name="",item_groupmember_image="",item_groupmember_link="";
+      }
+
+      try {
       var item_content = items[n].getElementsByTagName('statusnet:html').item(0).firstChild.data;
       item_content = item_content.replace(item_content.slice(item_content.indexOf('<div'),item_content.indexOf('div>')+4),'') 
     }
@@ -101,17 +113,17 @@ function displayResult()
       var item_content = '';
     }
     try {
-      var image_url,image_link="";
+      var image_url="",image_link="";
       if (['image/jpeg','image/gif','image/png','image/svg'].indexOf(items[n].getElementsByTagName('attachments').item(0).getElementsByTagName('enclosure').item(0).getAttribute("mimetype"))>=0) {
         var image_url=items[n].getElementsByTagName('attachments').item(0).getElementsByTagName('enclosure').item(0).getAttribute("url");
-        var image_link="<a target= \"_blank\" href=\""+image_url+"\"><img alt=\"Attachment\" width=\"200\" src=" + image_url + " /></a>"
+        var image_link="<a target= \"_blank\" href=\""+image_url+"\"><img alt=\"Attachment\" src=" + image_url + " /> </a>"
       }
     }
     catch(e) {
-      var image_url,image_link="";
+      var image_url="",image_link="";
     }
         
-    content += '<article>'+item_content+image_link+'</article>';
+    content += '<article>'+item_groupmember+item_content+image_link+'</article>';
     if ((max_item < items.length) && (n==max_item))
     {
       n = items.length;
