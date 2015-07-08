@@ -103,7 +103,7 @@ function displayResult()
       var image_url,image_link="";
       if (['image/jpeg','image/gif','image/png','image/svg'].indexOf(items[n].getElementsByTagName('attachments').item(0).getElementsByTagName('enclosure').item(0).getAttribute("mimetype"))>=0) {
         var image_url=items[n].getElementsByTagName('attachments').item(0).getElementsByTagName('enclosure').item(0).getAttribute("url");
-        var image_link="<a target= \"_blank\" href=\""+image_url+"\"><img alt=\"Attachment\" width=\"200\" src=" + image_url + " /></a>"
+        var image_link="<a target= \"_blank\" href=\""+image_url+"\"><img alt=\"Attachment\" src=" + image_url + " /></a>"
       }
     }
     catch(e) {
