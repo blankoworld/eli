@@ -85,45 +85,82 @@ function displayResult()
   xmlhttp.open("GET",rss_url,false);
   xmlhttp.send();
   xmlDoc=xmlhttp.responseXML;
+  //Header
   content = '<div id="eli_widget"><header>';
   if (img != '') {
     content += '<a target= "_blank" href="'+domain+"/" + user + '"><img src="'+img+'" alt="'+user+'" title="Avatar"/></a>';
   }
   content += ' <p>'+user+'</p></header>';
+  
+  //Statuses in Array
   var items = xmlDoc.getElementsByTagName('statuses').item(0).getElementsByTagName('status');
   var max_item = max - 1
+  
+  //Read item from array
   for (var n=0; n < items.length; n++) {
-      try {
-          var item_groupmember="",item_groupmember_name="",item_groupmember_image="",item_groupmember_link="";
-          if (type=='group'){
-             var item_groupmember_name = "@" + items[n].getElementsByTagName('screen_name').item(0).firstChild.data;
+    try {//Images, names and link for Group member
+        var item_groupmember="",item_groupmember_screen_name="",item_groupmember_name="", item_groupmember_image="",item_groupmember_link="";
+        if (type=='group'){
+             var item_groupmember_screen_name = "@" + items[n].getElementsByTagName('screen_name').item(0).firstChild.data;
+             var item_groupmember_name = items[n].getElementsByTagName('name').item(0).firstChild.data;
              var item_groupmember_image = items[n].getElementsByTagName('profile_image_url_https').item(0).firstChild.data;
-             var item_groupmember_link = items[n].getElementsByTagName('statusnet:profile_url').item(0).firstChild.data; 
-             var item_groupmember = '<span class=\"groupmember\"><a target= \"_blank\" href=\"' + item_groupmember_link + '\"><img alt=\"Profile\" align=\"left\" src="' + item_groupmember_image + '\" />' + item_groupmember_name + '</a>: </span>';}
-      }
-      catch (e) {
-        var item_groupmember="",item_groupmember_name="",item_groupmember_image="",item_groupmember_link="";
-      }
-
-      try {
-      var item_content = items[n].getElementsByTagName('statusnet:html').item(0).firstChild.data;
-      item_content = item_content.replace(item_content.slice(item_content.indexOf('<div'),item_content.indexOf('div>')+4),'') 
+             var item_groupmember_link = items[n].getElementsByTagNameNS('*','profile_url').item(0).firstChild.data;
+             var item_groupmember = '<span class=\"groupmember\"><a class=\"tooltip\" target= \"_blank\" href=\"' + item_groupmember_link + '\"><img alt=\"Profile\" align=\"left\" src="' + item_groupmember_image + '\" />' + item_groupmember_screen_name + ' <span>' + item_groupmember_name +'</span>  </a>     </span>';}
     }
     catch (e) {
-      var item_content = '';
+        var item_groupmember='',item_groupmember_name='',item_groupmember_image='',item_groupmember_link='';
     }
-    try {
-      var image_url="",image_link="";
-      if (['image/jpeg','image/gif','image/png','image/svg'].indexOf(items[n].getElementsByTagName('attachments').item(0).getElementsByTagName('enclosure').item(0).getAttribute("mimetype"))>=0) {
-        var image_url=items[n].getElementsByTagName('attachments').item(0).getElementsByTagName('enclosure').item(0).getAttribute("url");
-        var image_link="<a target= \"_blank\" href=\""+image_url+"\"><img alt=\"Attachment\" src=" + image_url + " /> </a>"
-      }
+
+    try {//Get Status Html
+        var item_content = items[n].getElementsByTagNameNS('*','html').item(0).firstChild.data;
+        item_content = item_content.replace(item_content.slice(item_content.indexOf('<div'),item_content.indexOf('div>')+4),'') 
+    }
+    catch (e) {
+        var item_content = '';
+    }
+    
+    try {//Get image and link if attached
+        var image_url="",image_link="";
+        if (['image/jpeg','image/gif','image/png','image/svg'].indexOf(items[n].getElementsByTagName('attachments').item(0).getElementsByTagName('enclosure').item(0).getAttribute("mimetype"))>=0) {
+            var image_url=items[n].getElementsByTagName('attachments').item(0).getElementsByTagName('enclosure').item(0).getAttribute("url");
+            var image_link="<a target= \"_blank\" href=\""+image_url+"\"><img alt=\"Attachment\" src=" + image_url + " /> </a>"
+        }
     }
     catch(e) {
       var image_url="",image_link="";
     }
+    
+    try {//Get Create Time from status
+        var item_time = '';
+        item_time = new Date( items[n].getElementsByTagName('created_at').item(0).firstChild.data).toLocaleString();
+        item_time= "<span class=\"tooltip\">&#x231B\;<span>Post time: " + item_time +"</span> </span>";
+    }
+    catch (e) {
+        var item_time = '';
+    }
+    
+    try {//Get location from status
+        var item_location='';
+        item_location = items[n].getElementsByTagName('user').item(0).getElementsByTagName('location').item(0).firstChild.data;
+        item_location= "<span class=\"tooltip\">&#x2302\; <span>Location: " + item_location +"</span></span>";
+    }
+    catch (e) {
+        var item_location = '';
+    }
+   
+    try {//Check for delete notice
+        var delete_notice='';
+        delete_notice = items[n].getElementsByTagName('qvitter_delete_notice').item(0).firstChild.data
+    }
         
-    content += '<article>'+item_groupmember+item_content+image_link+'</article>';
+    catch (e) {
+        var delete_notice= '';
+    }
+       
+    if (delete_notice!=='true'){//Build status string and add to timeline
+        content += '<article>'+item_groupmember+item_time+item_location +"<br />" +item_content+image_link+'</article>'
+    }
+    
     if ((max_item < items.length) && (n==max_item))
     {
       n = items.length;

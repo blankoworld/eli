@@ -3,6 +3,8 @@
 ## About
 
 This is a javascript widget that permit to show a StatusNet/GNU Social timeline. This works for a user or a group.
+![User Timeline](eli_attachment.png)   ![Group Timeline](eli_group.png)
+
 
 ## License
 
