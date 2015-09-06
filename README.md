@@ -3,6 +3,8 @@
 ## About
 
 This is a javascript widget that permit to show a StatusNet/GNU Social timeline. This works for a user or a group.
+
+
 ![User Timeline](eli_attachment.png)   ![Group Timeline](eli_group.png)
 
 
@@ -80,6 +82,26 @@ border-bottom: thin solid #eeeeee;
 #eli_widget article img {
 max-width: 240px;
 }
+
+#eli_widget article p {
+margin-top: 0px;
+}
+
+.tooltip {position: relative;}
+.tooltip span {display: none;}
+.tooltip:hover span {
+display: block;
+position: absolute;
+left: 0; bottom: 120%;
+margin: 20px 0 0;
+width: 200px;
+color: #4D4D4C;
+border: thin solid #eeeeee;
+padding: 4px;
+background: white;
+}
+
+
 ```
 
 An example is available on **minimal.html** page. You can also see a more complete version on **index.html** page.
