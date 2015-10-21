@@ -115,6 +115,8 @@ You probably want to change these variables:
   * max: Add here the number of statuses you want to display. By default StatusNet seems to only give 20 statuses.
   * tag: The name of the tag we should change to display all statuses. In the previous example, the div with ID equal to *content* would be changed. But you can add another ID.
   * domain: The URL of your GNU Social Instance.
+  * posttime_label: Change the label name that appears when you have the time the entry was posted.
+  * location_label: Change the label name that appears when the entry give a location.
 
 ## Read code
 
