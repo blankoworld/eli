@@ -4,6 +4,10 @@
 
 This is a javascript widget that permit to show a StatusNet/GNU Social timeline. This works for a user or a group.
 
+
+![User Timeline](eli_attachment.png)   ![Group Timeline](eli_group.png)
+
+
 ## License
 
 This program is under the [WTF Public License](http://sam.zoy.org/wtfpl/COPYING 'Read more about the WTF Public License').
@@ -78,6 +82,26 @@ border-bottom: thin solid #eeeeee;
 #eli_widget article img {
 max-width: 240px;
 }
+
+#eli_widget article p {
+margin-top: 0px;
+}
+
+.tooltip {position: relative;}
+.tooltip span {display: none;}
+.tooltip:hover span {
+display: block;
+position: absolute;
+left: 0; bottom: 120%;
+margin: 20px 0 0;
+width: 200px;
+color: #4D4D4C;
+border: thin solid #eeeeee;
+padding: 4px;
+background: white;
+}
+
+
 ```
 
 An example is available on **minimal.html** page. You can also see a more complete version on **index.html** page.
@@ -95,6 +119,14 @@ You probably want to change these variables:
 ## Read code
 
 **eli.js** is a minimal version of ELI. To have a more readable version, with more options, you can open **eli.max.js** file.
+
+### Howto minify eli.max.js
+
+  * Go to http://javascript-minifier.com/
+  * Copy/paste the content of eli.max.js
+  * Delete the license, the first lines ```var loadForm``` and the loadConfig() function
+  * Click on **Minify**
+  * Copy the result into eli.js file
 
 ## Contact
 
