@@ -19,47 +19,49 @@ var domain = 'https://quitter.se';
 var location_label = 'Location:';
 var posttime_label = 'Post time:';
 
-// Other variables
+// Network access API url
 var api = '/api/';
 var user_api = 'users/show/';
 var user_rss = 'statuses/user_timeline/';
 var group_api = 'statusnet/groups/show/';
 var group_rss = 'statusnet/groups/timeline/';
-var api_url = domain + api + user_api;
-var api_rss_url = domain + api + user_rss;
-var img_name = "profile_image_url";
-if (type === "group") {
-  api_url = domain + api + group_api;
-  api_rss_url = domain + api + group_rss;
-  img_name = "stream_logo";
-}
-var url = api_url + user + ".xml";
+
+// Other variables
+var api_url = "",
+    api_rss_url = "",
+    img_name = "";
+
+var setConfig = function setConfig(domain, user, type) {
+  api_url = domain + api + user_api;
+  api_rss_url = domain + api + user_rss;
+  img_name = "profile_image_url";
+  if (type === "group") {
+    api_url = domain + api + group_api;
+    api_rss_url = domain + api + group_rss;
+    img_name = "stream_logo";
+  }
+  url = api_url + user + ".xml";
+};
 
 var loadConfig = function loadConfig() {
-    domain = document.getElementById('profile_domain').value;
-    user = document.getElementById('profile_name').value;
-    profile_type = document.getElementById('profile_type');
-    type = profile_type.options[profile_type.selectedIndex].value;
-    api_url = domain + api + user_api;
-    api_rss_url = domain + api + user_rss;
-    img_name = 'profile_image_url';
-    if (type === 'group') {
-        api_url = domain + api + group_api;
-        api_rss_url = domain + api + group_rss;
-        img_name = 'stream_logo';
-    }
-    url = api_url + user + '.xml';
-
-    displayResult();
+  // fetch user choices
+  var domain = document.getElementById('profile_domain').value;
+  var user = document.getElementById('profile_name').value;
+  var profile_type = document.getElementById('profile_type');
+  var type = profile_type.options[profile_type.selectedIndex].value;
+  // change current configuration
+  setConfig(domain, user, type);
+  // display the result
+  displayResult();
 };
 
 var displayResult = function displayResult() {
   if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp=new XMLHttpRequest();
+    xmlhttp = new XMLHttpRequest();
   } else {
     // code for IE6, IE5
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
   }
   xmlhttp.open("GET", url, false);
   xmlhttp.send();
@@ -152,7 +154,7 @@ var displayResult = function displayResult() {
 
     //Build status string and add to timeline
     if (delete_notice !== 'true') {
-      content += '<article>'+item_groupmember+item_time+item_location +"<br />" +item_content+image_link+'</article>';
+      content += '<article>'+item_groupmember + item_time + item_location + "<br />" + item_content + image_link + '</article>';
     }
 
     if ((max_item < items.length) && (n==max_item)) {
@@ -163,5 +165,8 @@ var displayResult = function displayResult() {
   content += '<footer></footer></div>';
   document.getElementById(tag).innerHTML = content;
 };
+
+// Set default configuration
+setConfig(domain, user, type);
 
 window.onload = displayResult;
