@@ -2,13 +2,33 @@
 
 ## About
 
-This is a javascript widget that permit to show a GNU Social timeline. This works for a user or a group.
+ELI is a javascript widget that permits to show a GNU Social timeline. It can display either a user timeline or a group timeline.
+
+We usually call it a *ELI's Badge*, a *ELI's Timeline* or just **ELI**.
+
+I suggest you to checkout [our official demo page](http://eli.depotoi.re/ "Discover ELI in action") to have an idea about what ELI can do.
+
+[![Demo](https://img.shields.io/badge/demo-official-green.svg)](http://eli.depotoi.re/ "Discover ELI in action")
+![Javascript](https://img.shields.io/badge/code-javascript-bb0000.svg)
+
+## Overview
+
+ELI retrieves some data from GNU Social network and create a *Badge*.
+
+You're so able to:
+
+  * display either user or group timeline
+  * display its avatar/logo
+  * choose the domain from which you fetch statuses
+  * set a limit of displayed statuses
+  * display statuses ' attachments
+  * display time and location from each status
+  * choose time/location displayed label
+  * display your main page even if ELI don't finish to retrieve data
 
 ![User Timeline](eli_attachment.png)   ![Group Timeline](eli_group.png)
 
-## License
-
-This program is under the [WTF Public License](http://sam.zoy.org/wtfpl/COPYING 'Read more about the WTF Public License').
+Check local demo using [**minimal.html**](minimal.html) page or try an interactive one with [**index.html**](index.html) page.
 
 ## Installation
 
@@ -42,6 +62,7 @@ In order ELI widget to be more beautiful, add this in your CSS file or in **`</s
 ```css
 #eli_widget {
 width: 250px;
+height: auto;
 margin: 0;
 padding: 0;
 border: thin solid #eee;
@@ -75,10 +96,12 @@ display: block;
 margin-bottom: 5px;
 padding: 5px;
 border-bottom: thin solid #eeeeee;
+overflow: hidden; /* For too long link: hide but enable click on it */
 }
 
 #eli_widget article img {
-max-width: 240px;
+margin: 5px;
+max-width: 230px;
 }
 
 #eli_widget article p {
@@ -90,7 +113,7 @@ margin-top: 0px;
 .tooltip:hover span {
 display: block;
 position: absolute;
-left: 0; bottom: 120%;
+left: 0; top: 10%;
 margin: 20px 0 0;
 width: 200px;
 color: #4D4D4C;
@@ -102,32 +125,41 @@ background: white;
 
 A more fully CSS example is available in **style.css** file.
 
-You can also check the demo on **minimal.html** page. You can also see a more complete version on **index.html** page.
-
 ## Configuration
 
-You probably want to change these variables:
+When adding ELI's javascript declaration, you can use these variables:
 
-  * type: Add here **user** OR **group** if you want to follow a user OR a group
-  * user: Add here the name of the user (or the group) you want to follow
-  * max: Add here the number of statuses you want to display. By default StatusNet seems to only give 20 statuses.
-  * tag: The name of the tag we should change to display all statuses. In the previous example, the div with ID equal to *content* would be changed. But you can add another ID.
-  * domain: The URL of your GNU Social Instance.
-  * posttime_label: Change the label name that appears when you have the time the entry was posted.
-  * location_label: Change the label name that appears when the entry give a location.
+  * type: Either **user** OR **group**. The last one is used when you want to follow a group
+  * user: the name of the user (or the group) you want to follow
+  * max: maximum displayed statuses. By default GNU Social seems to give only 20 statuses
+  * tag: tagname ELI will use to replace its content and display the badge
+  * domain: your GNU Social instance URL
+  * timeLabel: Label that appears on time entry
+  * locationLabel: Label that appears on location entry
 
-## Read code
+## Contribution
 
-**eli.js** is a minimal version of ELI. To have a more readable version, with more options, you can open **eli.max.js** file.
+[ELI is available on Github](http://github.com/blankoworld/eli).
 
-### Howto minify eli.max.js
+**eli.js** is a minimal version of ELI. To have a more readable version, and to develop it, we recommand you to use **eli.max.js** file.
 
-  * Go to http://javascript-minifier.com/
+After having improved and tested ELI's code, **don't forget to minify your code** by using http://javascript-minifier.com/:
+
   * Copy/paste the content of eli.max.js
-  * Delete the license, the first lines ```var loadForm``` and the loadConfig() function
+  * Delete the license lines, and these functions:
+    * loadForm()
+    * loadConfig()
   * Click on **Minify**
-  * Copy the result into eli.js file
+  * Copy the result and replace eli.js file content
 
-## Contact
+Then publish your result on Github.
 
-You can contact me at the given address: eli [AT] dossmann [DOT] net
+## License
+
+This program is under the [WTF Public License](http://sam.zoy.org/wtfpl/COPYING 'Read more about the WTF Public License').
+
+## Contributors
+
+  * [LubuWest](https://github.com/LubuWest)
+  * [mart-e](https://github.com/mart-e)
+  * [Olivier DOSSMANN](https://github.com/blankoworld)

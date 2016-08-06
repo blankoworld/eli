@@ -1,4 +1,5 @@
 Current version (0.4-trunk):
+  - improve README.md file by adding Overview section, Contributors, etc.
   - new CHANGELOG file
   - asynchronous calls from the page to XML files
   - common function to set configuration from initial script and form
