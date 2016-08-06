@@ -1,0 +1,31 @@
+Current version (0.4-trunk):
+  - new CHANGELOG file
+  - asynchronous calls from the page to XML files
+  - common function to set configuration from initial script and form
+  - Change coding style: indentation, whitespaces, more functions, beautify code, use createElement() instead of HTML code
+
+Version 0.3:
+  - improve documentation with screenshots
+  - identi.ca is closed. Use another social network: quitter.se
+  - new "domain" variable to select the domain
+  - display statuses ' attachments in timeline with a link to them
+  - delete "div" tag from statuses to be compatible with timeline display
+  - add a link on pictures from user/group to check their timeline
+  - add time and location data from each status
+  - add 2 variables to adapt displayed text: posttime_label and location_label
+  - improve display of homepage
+
+Version 0.2:
+  - extract ELI's javascript code to an external file
+  - add an external stylesheet
+  - fetch picture from user/group to display it
+  - improve documentation
+  - make a minimal javascript version
+
+Version 0.1.1:
+  - add a form to change variables
+
+Version 0.1:
+  - can display user or group
+  - set a "max" variable to choose how many statuses to display
+  - README file
