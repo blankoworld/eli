@@ -2,11 +2,9 @@
 
 ## About
 
-This is a javascript widget that permit to show a StatusNet/GNU Social timeline. This works for a user or a group.
-
+This is a javascript widget that permit to show a GNU Social timeline. This works for a user or a group.
 
 ![User Timeline](eli_attachment.png)   ![Group Timeline](eli_group.png)
-
 
 ## License
 
@@ -100,11 +98,11 @@ border: thin solid #eeeeee;
 padding: 4px;
 background: white;
 }
-
-
 ```
 
-An example is available on **minimal.html** page. You can also see a more complete version on **index.html** page.
+A more fully CSS example is available in **style.css** file.
+
+You can also check the demo on **minimal.html** page. You can also see a more complete version on **index.html** page.
 
 ## Configuration
 
@@ -132,4 +130,4 @@ You probably want to change these variables:
 
 ## Contact
 
-You can contact me at the given address: olivier+eli [AT] dossmann [DOT] net
+You can contact me at the given address: eli [AT] dossmann [DOT] net
