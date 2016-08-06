@@ -150,7 +150,7 @@ var getTargetStatuses = function getTargetStatuses(source) {
             var item = document.createElement("article");
             var htmlContent = "";
             if (memberInfo !== "") {
-                htmlContent += "<span>" + memberInfo.innerHTML + "</span>";
+                htmlContent += "<span class=\"groupmember\">" + memberInfo.innerHTML + "</span>";
             }
             if (timeElt !== "") {
                 htmlContent += "<span class=\"tooltip\">" + timeElt.innerHTML + "</span>";
@@ -158,7 +158,7 @@ var getTargetStatuses = function getTargetStatuses(source) {
             if (locationElt !== "") {
                 htmlContent += "<span class=\"tooltip\">" + locationElt.innerHTML + "</span>";
             }
-            htmlContent += document.createElement("br").innerHTML;
+            htmlContent += "<br>";
             htmlContent += content;
             if (imageElt !== "") {
                 htmlContent += imageElt.innerHTML;
@@ -253,7 +253,7 @@ var createMemberInfoBloc = function createMemberInfoBloc(text) {
             // add image, pseudo, then name into the link
             var imageElt = document.createElement("img");
             imageElt.alt = "Profile";
-            imageElt.style.align = "left"; // TODO: Add this directive into CSS
+            imageElt.align = "left"; // TODO: Add this directive into CSS (add imageElt.classList.add("member"))
             imageElt.src = image;
             linkElt.appendChild(imageElt);
             linkElt.appendChild(document.createTextNode(pseudo));
