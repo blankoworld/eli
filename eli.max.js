@@ -84,17 +84,16 @@ var getTargetStatuses = function getTargetStatuses(source) {
     var statuses = source.querySelector('statuses').getElementsByTagName('status');
 
     // browse statuses but no more than "max"
-    var max_item = max - 1;
-    for (var n = 0; n < statuses.length; n++) {
-        var status = statuses[n];
+    var displayedItemCounter = 0;
+    for (var cursor = 0; cursor < statuses.length; cursor++) {
+        var status = statuses[cursor];
         var content = "";
 
         // Check that this status can be displayed. If status deleted, do not do anything
         var statusDeleted = "";
         try {
-            statusDeleted = status.getElementsByTagName('qvitter_delete_notice').item(0).firstChild.data;
+            statusDeleted = status.querySelector('qvitter_delete_notice').textContent;
         } catch (e) {}
-
         // Check status and add it to timeline only if it was not deleted
         if (statusDeleted !== 'true') {
             // Add a bloc about member that contains images, names and link
@@ -166,11 +165,14 @@ var getTargetStatuses = function getTargetStatuses(source) {
             htmlContent += "";
             item.innerHTML = htmlContent;
             widget.insertBefore(item, templateFooter);
+
+            // increment number of item displayed on screen
+            displayedItemCounter++;
         }
 
-        // Hack to break the loop
-        if ((max_item < statuses.length) && (n === max_item)) {
-            n = statuses.length;
+        // Hack to break the loop: set cursor to its maximum.
+        if (displayedItemCounter === max) {
+            cursor = statuses.length;
         }
     }
 };
