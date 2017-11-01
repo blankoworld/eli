@@ -55,7 +55,7 @@ Then add this code **at the end of your page before the `</body>` tag**:
     </script>
 ```
 
-Adapt domain content by your GNU Social Instance. For an example: **https://quitter.se**.
+Adapt domain content by your GNU Social Instance. For an example: **https://status.fsf.org**.
 
 In order ELI widget to be more beautiful, add this in your CSS file or in **`</style>` tag**:
 

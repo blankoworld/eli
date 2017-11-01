@@ -11,11 +11,11 @@ loadForm.addEventListener('submit', function(e) {
 }, true);
 
 // Change variables here.
-var type = 'user'; // could be 'group' to follow a group
-var user = 'debian';
+var type = 'group'; // could be 'group' to follow a group
+var user = 'fsf';
 var max = 5;
 var tag = 'elitimeline';
-var domain = 'https://quitter.se';
+var domain = 'https://status.fsf.org';
 var locationLabel = 'Location:';
 var timeLabel = 'Post time:';
 
