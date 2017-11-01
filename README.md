@@ -6,9 +6,9 @@ ELI is a javascript widget that permits to show a GNU Social timeline. It can di
 
 We usually call it a *ELI's Badge*, a *ELI's Timeline* or just **ELI**.
 
-I suggest you to checkout [our official demo page](http://eli.depotoi.re/ "Discover ELI in action") to have an idea about what ELI can do.
+I suggest you to checkout [our official demo page](http://eli.o9.re/ "Discover ELI in action") to have an idea about what ELI can do.
 
-[![Demo](https://img.shields.io/badge/demo-official-green.svg)](http://eli.depotoi.re/ "Discover ELI in action")
+[![Demo](https://img.shields.io/badge/demo-official-green.svg)](http://eli.o9.re/ "Discover ELI in action")
 ![Javascript](https://img.shields.io/badge/code-javascript-bb0000.svg)
 
 ## Overview
